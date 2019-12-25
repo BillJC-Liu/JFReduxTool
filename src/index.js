@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import App from './App.jsx';
-import registerEkko from './ekko'
-import { Provider } from './ekko'
+import registerEkko,{ Provider } from './ekko'
 import * as allModel from './model'
 import Test from './test'
 const store = registerEkko(allModel)

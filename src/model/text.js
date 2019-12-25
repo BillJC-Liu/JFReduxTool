@@ -12,8 +12,9 @@ const model = {
       const that = this;
       const { test2 } = that.getState();
       const { a, b } = that.getModelState();
+      let data = type === 'add'? a+1 : a-1
       await that.setState({
-        a: a + 1
+        a:  data
       })
     },
   }
