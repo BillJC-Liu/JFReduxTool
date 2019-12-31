@@ -7,8 +7,7 @@
 - getState 获取所有model
 - resetState 重置当前model的状态
 
-## change log
-
-### 2019.12.31 10:43:49
+## Change Log
+### 2019.12.31 
   - 新增API resetState 重置当前model的redux值到初始值
   - 修复bug。修复 combineReducer 没有记录之前的redux值
