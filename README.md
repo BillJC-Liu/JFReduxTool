@@ -5,7 +5,7 @@
 - setState 设置值
 - getModelState 获取当前所在model的状态
 - getState 获取所有model
-
+- resetState 重置当前model的状态
 
 ## change log
 
