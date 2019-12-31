@@ -12,15 +12,10 @@ const createReducer = (model) => {
   // 此方法是 redux中的 combination 。
   const getReducer = (reducers, defaultState) => {
     const reducersList = Object.keys(reducers).map(key => (state, action) => {
-      if (action.type === '@redux.ekko.init') {
-        // 保存初始值
-        allModelInitReducer = { ...allModelInitReducer, [model.namespace]: { ...state } };
-      }
-      return `${namespace}` === action.type ?
-        // key 值匹配 则执行该方法 state 为 store 的 state
-        { ...state, ...action.payload }
-        :
-        state
+      // key 值匹配 则执行该方法 state 为 store 的 state
+      if (`${namespace}` === action.type) return { ...state, ...action.payload }
+      allModelInitReducer = { ...allModelInitReducer, [model.namespace]: { ...state } };
+      return state
     })
 
     return (_state = defaultState, _action) => {

@@ -8,6 +8,7 @@ const Index = (props) => {
       <h1>App</h1>
       <input type="text" onChange={e => AppModel.reducers.changeName(e.target.value)} />
       <p>这时我的app名字：{props.appName}</p>
+      <p><button onClick={() => AppModel.reducers.reset()} >重置</button></p>
     </div>
   )
 }

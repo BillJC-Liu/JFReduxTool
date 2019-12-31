@@ -31,11 +31,6 @@ const registerEkko = (modelObj, initState, middlewares) => {
     endEnhancer  // 中间件 chunk 中间件
   )
 
-  // 执行一次dispatch 将初始值保存一次 作为reset的凭据
-  store.dispatch({
-    type: "@redux.ekko.init"
-  })
-
   // 将action 挂在model下 
   // 将model中的reducer的key值注册成action
   registerAction(model, store)
