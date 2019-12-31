@@ -5,16 +5,16 @@ const registerAction = (model, store) => {
 	// 将每个model 下面的方法都注册成action 
 	allModel.forEach(item => {
 		if (item.reducers) {
-			let reducersKeys = Object.keys(item.reducers)
-			item.reducers.getState = () => store.getState();
-			item.reducers.getModelState = () => store.getState()[item.namespace];
-			item.reducers.resetState = () => {
+			const that = item.reducers
+			that.getState = () => store.getState();
+			that.getModelState = () => store.getState()[item.namespace];
+			that.resetState = () => {
 				store.dispatch({
 					type: `${item.namespace}`,
 					payload: allModelInitReducer[item.namespace]
 				})
 			}
-			item.reducers.setState = (data) => {
+			that.setState = (data) => {
 				store.dispatch({
 					type: `${item.namespace}`,
 					payload: data
