@@ -1,5 +1,7 @@
 import registerEkko from './index'
 
+let allModelInitReducer = {}
+
 const createReducer = (model) => {
   if (!model.namespace) throw Error(`namespace is missing `)
   if (!model.state) throw Error(`state is missing in ${model.namespace}`)
@@ -10,6 +12,10 @@ const createReducer = (model) => {
   // 此方法是 redux中的 combination 。
   const getReducer = (reducers, defaultState) => {
     const reducersList = Object.keys(reducers).map(key => (state, action) => {
+      if (action.type === '@redux.ekko.init') {
+        // 保存初始值
+        allModelInitReducer = { ...allModelInitReducer, [model.namespace]: { ...state } };
+      }
       return `${namespace}` === action.type ?
         // key 值匹配 则执行该方法 state 为 store 的 state
         { ...state, ...action.payload }
@@ -27,5 +33,5 @@ const createReducer = (model) => {
     [namespace]: getReducer(reducers, state)
   }
 }
-
+export { allModelInitReducer }
 export default createReducer

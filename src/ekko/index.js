@@ -5,7 +5,6 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { createLogger } from "redux-logger";
 import createReducer from './createReducer'
 import registerAction from './registerAction'
-
 const registerEkko = (modelObj, initState, middlewares) => {
   const model = Object.values(modelObj)
   let bindReducersModels = {};
@@ -17,7 +16,7 @@ const registerEkko = (modelObj, initState, middlewares) => {
     } else {
       throw Error(`${item.namespace} is repeat , namespace must be unique`)
     }
-    return (bindReducersModels = { ...createReducer(item) })
+    return (bindReducersModels = Object.assign({ ...createReducer(item) }, bindReducersModels))
   })
   const middlewaresArr = middlewares || [];
   const normalDevToolCompose = composeWithDevTools({}); // 浏览器控制台中的redux
@@ -31,6 +30,11 @@ const registerEkko = (modelObj, initState, middlewares) => {
     initState,  // 初始值  一般该值为空
     endEnhancer  // 中间件 chunk 中间件
   )
+
+  // 执行一次dispatch 将初始值保存一次 作为reset的凭据
+  store.dispatch({
+    type: "@redux.ekko.init"
+  })
 
   // 将action 挂在model下 
   // 将model中的reducer的key值注册成action

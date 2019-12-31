@@ -6,9 +6,7 @@ class Index extends React.Component {
   handleChange = async (type) => {
     await testModel.reducers.add(type)
   }
-
   render() {
-    console.log("test props:", this.props);
     return (
       <div>
         计数器的值：{this.props.test2.a}
@@ -16,12 +14,13 @@ class Index extends React.Component {
           <button onClick={() => this.handleChange('add')}>+</button>
           <button onClick={() => this.handleChange('odd')}>-</button>
         </p>
+        <p>
+          <button onClick={() => testModel.reducers.resetState()} >重置当前model的redux值</button>
+        </p>
       </div>
     )
   }
 }
-
-// export default Index;
 
 export default connect(state => {
   console.log("test state:", state);

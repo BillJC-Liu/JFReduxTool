@@ -1,3 +1,4 @@
+import { reset } from "ansi-colors";
 
 const model = {
   namespace: 'test2',
@@ -17,6 +18,10 @@ const model = {
         a:  data
       })
     },
+    async reset(){
+      console.log("resetresetresetresetresetreset");
+      this.resetState()
+    }
   }
 }
 

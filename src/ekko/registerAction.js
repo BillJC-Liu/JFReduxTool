@@ -1,3 +1,4 @@
+import { allModelInitReducer } from './createReducer'
 
 const registerAction = (model, store) => {
 	const allModel = Object.values(model)
@@ -7,6 +8,12 @@ const registerAction = (model, store) => {
 			let reducersKeys = Object.keys(item.reducers)
 			item.reducers.getState = () => store.getState();
 			item.reducers.getModelState = () => store.getState()[item.namespace];
+			item.reducers.resetState = () => {
+				store.dispatch({
+					type: `${item.namespace}`,
+					payload: allModelInitReducer[item.namespace]
+				})
+			}
 			item.reducers.setState = (data) => {
 				store.dispatch({
 					type: `${item.namespace}`,
